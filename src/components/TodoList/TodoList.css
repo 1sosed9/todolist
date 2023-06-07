@@ -1,0 +1,23 @@
+.btnOne {
+  margin-left: 12px;
+}
+
+.listItems {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 24px;
+  padding: 6px;
+  transition: 0.1s all;
+}
+
+.listItems:hover {
+  background-color: #ff9797;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.close {
+    color: gray;
+    text-decoration: line-through;
+}
