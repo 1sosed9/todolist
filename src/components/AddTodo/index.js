@@ -9,13 +9,15 @@ function AddTodo({ setTodo, todo }) {
     const [value, setValue] = useState('');
 
     function saveTodo() {
-        setTodo(
-            [...todo, {
-                id: uuid(),
-                title: value,
-                status: true
-            }]
-        )
+        if (value) {
+            setTodo(
+                [...todo, {
+                    id: uuid(),
+                    title: value,
+                    status: true
+                }]
+            )
+        }
         setValue("");
     }
 

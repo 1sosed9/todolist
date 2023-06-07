@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Button } from "react-bootstrap";
+import { Row, Col, Button, ButtonGroup } from "react-bootstrap";
 import './TodoList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrash, faPen, faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
@@ -9,6 +9,11 @@ function TodoList({ todo, setTodo }) {
 
     const [edit, setEdit] = useState(null);
     const [value, setValue] = useState('');
+    const [filtered, setFiltered] = useState(todo);
+
+    useEffect(() => {
+        setFiltered(todo)
+    }, [todo]);
 
     function deleteTodo(id) {
         let newTodo = [...todo].filter(item => item.id !== id);
@@ -41,10 +46,29 @@ function TodoList({ todo, setTodo }) {
         setEdit(null);
     }
 
+    function todoFilter(status) {
+        if (status === 'all') {
+            setFiltered(todo);
+        } else {
+            let newTodo = [...todo].filter(item => item.status === status);
+            setFiltered(newTodo);
+        }
+    }
+
     return (
         <div>
+            <Row>
+                <Col className="btnGroup">
+                    <ButtonGroup  aria-label="Basic example" className="btns">
+                        <Button onClick={() => todoFilter('all')}>Все</Button>
+                        <Button onClick={() => todoFilter(true)}>Открытые</Button>
+                        <Button onClick={() => todoFilter(false)}>Закрытые</Button>
+                    </ButtonGroup>
+                </Col>
+            </Row>
+
             {
-                todo.map((item, i) => {
+                filtered.map((item, i) => {
                     return (
                         <div key={item.id} className="listItems">
                             {
@@ -53,7 +77,7 @@ function TodoList({ todo, setTodo }) {
                                         <input value={value} onChange={(e) => setValue(e.target.value)} />
                                     </div>
                                     :
-                                    <div className={!item.status? 'close' : ''}>{item.title}</div>
+                                    <div className={!item.status ? 'close' : ''}>{item.title}</div>
                             }
 
                             {
