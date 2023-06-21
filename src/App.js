@@ -24,16 +24,7 @@ function App() {
             title: 'third todo',
             status: false
         },
-        {
-            id: 4,
-            title: 'Проверка автоматической сборки',
-            status: false
-        },
-        {
-            id: 5,
-            title: 'Добавляем пятую задачу',
-            status: false
-        },
+       
     ])
 
     return (
